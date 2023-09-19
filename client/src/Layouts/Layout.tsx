@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 export default function Layout() {
   return (
     <StyledContainer>
+      <StyledNav />
       <Outlet />
     </StyledContainer>
   );
@@ -21,4 +22,11 @@ const StyledContainer = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.6;
+`;
+
+const StyledNav = styled.div`
+  width: 100%;
+  background-color: rgb(224, 239, 249);
+  padding: 1% 0;
+  position: absolute;
 `;
