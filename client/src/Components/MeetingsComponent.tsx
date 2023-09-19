@@ -32,7 +32,7 @@ export default function MeetingsComponent({ setOpen }: MeetingsComponentProps) {
 const MeetingsCustomerContainer = styled.div`
   background-color: white;
   display: flex;
-  margin: 2rem;
+  margin: 0.6rem;
   padding: 1em;
   align-items: center;
   text-align: center;

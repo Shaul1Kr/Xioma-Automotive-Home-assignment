@@ -74,6 +74,7 @@ const Customer = styled.p`
   font-weight: bold;
   font-size: 0.8em;
   text-align: left;
+  margin: 0;
 `;
 
 const Title = styled.p`

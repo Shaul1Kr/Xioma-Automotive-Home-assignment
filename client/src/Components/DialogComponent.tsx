@@ -44,7 +44,7 @@ export default function DialogComponent({
           </CustomerContainer>
           <DescriptionContainer>
             <P>Description</P>
-            <Textarea rows={15} />
+            <Textarea rows={5} />
           </DescriptionContainer>
         </InfoContainer>
         <SubmitContainer>

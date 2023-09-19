@@ -71,7 +71,7 @@ const LoginDiv = styled.div`
 const InputsContainer = styled.div`
   display: grid;
   gap: 3rem;
-  padding-bottom: 10rem;
+  padding-bottom: 5rem;
 `;
 
 const PasswordContainer = styled.div`
