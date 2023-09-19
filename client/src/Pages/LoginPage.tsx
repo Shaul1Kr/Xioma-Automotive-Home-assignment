@@ -2,16 +2,25 @@ import { styled } from "styled-components";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     //Get all target and convert then in an object
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    console.log({ data });
+    const loggedIn = await axios.post(
+      "http://localhost:3000/api/users/login",
+      data
+    );
+    if (!loggedIn.response?.data.msg) {
+      navigate("/choice");
+    }
   };
 
   return (

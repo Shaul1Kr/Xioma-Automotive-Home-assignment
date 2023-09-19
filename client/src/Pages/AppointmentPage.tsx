@@ -12,6 +12,7 @@ export default function AppointmentPage() {
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
   const [newOpen, setNewOpen] = useState<boolean>(false);
+
   return (
     <Conatiner>
       <DialogComponent setOpen={setOpen} open={open} />
