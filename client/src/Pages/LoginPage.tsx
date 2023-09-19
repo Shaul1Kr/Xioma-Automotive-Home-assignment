@@ -21,27 +21,29 @@ export default function LoginPage() {
         <StyledForm onSubmit={handleSubmit}>
           <InputsContainer>
             <StyledInput type="text" label="Username" name="username" />
-            <StyledInput
-              type={showPassword ? "text" : "password"}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    {
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={() => setShowPassword((show) => !show)}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    }
-                  </InputAdornment>
-                ),
-              }}
-              label="Password"
-              name="password"
-            />
-            <ForgotPassword>Forgot Password?</ForgotPassword>
+            <PasswordContainer>
+              <StyledInput
+                type={showPassword ? "text" : "password"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={() => setShowPassword((show) => !show)}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      }
+                    </InputAdornment>
+                  ),
+                }}
+                label="Password"
+                name="password"
+              />
+              <ForgotPassword>Forgot Password?</ForgotPassword>
+            </PasswordContainer>
           </InputsContainer>
           <StyledButton type="submit" value="Submit">
             Sign In
@@ -58,7 +60,7 @@ const PageContainer = styled.div`
   align-items: center;
   background-color: white;
   width: 50%;
-  height: 100vh;
+  min-height: 100dvh;
   justify-content: center;
 `;
 
@@ -70,6 +72,10 @@ const InputsContainer = styled.div`
   display: grid;
   gap: 3rem;
   padding-bottom: 10rem;
+`;
+
+const PasswordContainer = styled.div`
+  display: grid;
 `;
 
 const StyledForm = styled.form`
@@ -100,4 +106,5 @@ const ForgotPassword = styled.a`
   font-size: 0.7rem;
   color: black;
   text-decoration: underline;
+  text-align: end;
 `;
