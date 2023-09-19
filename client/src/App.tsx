@@ -3,6 +3,7 @@ import Layout from "./Layouts/Layout";
 import LoginPage from "./Pages/LoginPage";
 import Choice from "./Pages/Choice";
 import CustomersPage from "./Pages/CustomersPage";
+import AppointmentPage from "./Pages/AppointmentPage";
 
 export default function App() {
   return <RouterProvider router={router} />;
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
         element: <Choice />,
       },
       { path: "/customers", element: <CustomersPage /> },
+      { path: "/appointment", element: <AppointmentPage /> },
     ],
   },
 ]);

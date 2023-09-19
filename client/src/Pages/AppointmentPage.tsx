@@ -1,18 +1,21 @@
+import { useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import CustomerComponent from "../Components/CustomerComponent";
 import MeetingsComponent from "../Components/MeetingsComponent";
-import { useState } from "react";
 import DialogComponent from "../Components/DialogComponent";
+import NewDialogComponent from "../Components/NewDialogComponent";
 
-export default function CustomersPage() {
+export default function AppointmentPage() {
   const navigate = useNavigate();
   const [open, setOpen] = useState<boolean>(false);
+  const [newOpen, setNewOpen] = useState<boolean>(false);
   return (
     <Conatiner>
       <DialogComponent setOpen={setOpen} open={open} />
+      <NewDialogComponent setOpen={setNewOpen} open={newOpen} />
       <ChoiceContainer>
         <PeopleOutlineIcon
           sx={{ fontSize: 30, color: "blue", cursor: "pointer" }}
@@ -24,19 +27,22 @@ export default function CustomersPage() {
         />
       </ChoiceContainer>
       <CustomersContainer>
-        <CustomerComponent />
-        <MeetingTitleContainer>
-          <MeetingTitle>Meetings</MeetingTitle>
-          <MeetingsDvider></MeetingsDvider>
-        </MeetingTitleContainer>
-        <MeetingWrapper>
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-        </MeetingWrapper>
+        <DateContainer>
+          <p>23/08/23</p>
+        </DateContainer>
+        <MeetingsComponent setOpen={setOpen} />
+        <MeetingsComponent setOpen={setOpen} />
+        <MeetingsComponent setOpen={setOpen} />
+        <MeetingsComponent setOpen={setOpen} />
+        <MeetingsComponent setOpen={setOpen} />
+        <MeetingsComponent setOpen={setOpen} />
+        <MeetingsComponent setOpen={setOpen} />
+        <IconWrapper>
+          <AddIcon
+            sx={{ fontSize: 50, color: "blue", cursor: "pointer " }}
+            onClick={() => setNewOpen((prev) => !prev)}
+          />
+        </IconWrapper>
       </CustomersContainer>
     </Conatiner>
   );
@@ -45,6 +51,8 @@ export default function CustomersPage() {
 const Conatiner = styled.div`
   display: flex;
 `;
+
+const DateContainer = styled.div``;
 
 const ChoiceContainer = styled.div`
   display: flex;
@@ -60,28 +68,10 @@ const CustomersContainer = styled.div`
   width: 100%;
   background-color: hsl(0, 3.8461538461538316%, 89.80392156862746%);
   flex-direction: column;
-  box-sizing: border-box;
-  height: 100vh;
 `;
 
-const MeetingTitleContainer = styled.div`
-  margin: 2rem;
+const IconWrapper = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const MeetingsDvider = styled.div`
-  border-top: grey 1px solid;
-  height: 0;
-  width: 100%;
-`;
-
-const MeetingWrapper = styled.div`
-  overflow-y: auto;
-  flex: 1;
-`;
-
-const MeetingTitle = styled.p`
-  margin: 0;
+  justify-content: end;
+  padding: 1rem;
 `;
