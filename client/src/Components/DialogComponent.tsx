@@ -4,26 +4,27 @@ import { styled } from "styled-components";
 interface DialogComponentProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   open: boolean;
+  meeting: Meetings;
 }
 
 export default function DialogComponent({
   setOpen,
   open,
+  meeting,
 }: DialogComponentProps) {
   return (
     <Dialog open={open}>
       <Conatiner>
         <ProfilContainer>
-          <Avatar
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="Avatar"
-          />
-          <P>Haim Nagar</P>
+          <Avatar src={meeting.picturePath} alt="Avatar" />
+          <P>
+            {meeting.firstName} {meeting.lastName}
+          </P>
         </ProfilContainer>
         <InfoContainer>
           <SubjectContainer>
             <P>Subject</P>
-            <Detail>Details Of Treatments</Detail>
+            <Detail>{meeting.subject}</Detail>
           </SubjectContainer>
           <DateAndTimeConatainer>
             <DateAndTimeSubjects>
@@ -31,20 +32,22 @@ export default function DialogComponent({
               <P>Tiem to Time</P>
             </DateAndTimeSubjects>
             <DateAndTimeInfo>
-              <Detail>15/8/2022</Detail>
+              <Detail>{meeting.Date}</Detail>
               <Time>
-                <Detail>13:15</Detail>
-                <Detail>17:21</Detail>
+                <Detail>{meeting.start}</Detail>
+                <Detail>{meeting.end}</Detail>
               </Time>
             </DateAndTimeInfo>
           </DateAndTimeConatainer>
           <CustomerContainer>
             <P>Customer</P>
-            <Detail>Haim Nagar</Detail>
+            <Detail>
+              {meeting.firstName} {meeting.lastName}
+            </Detail>
           </CustomerContainer>
           <DescriptionContainer>
             <P>Description</P>
-            <Textarea rows={5} />
+            <Textarea rows={15} value={meeting.discription} />
           </DescriptionContainer>
         </InfoContainer>
         <SubmitContainer>

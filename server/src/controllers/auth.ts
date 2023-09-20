@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-const login = async (req: Request, res: Response) => {
+export default async function login(req: Request, res: Response) {
   try {
     const { username, password } = req.body;
     console.info(
@@ -26,6 +26,4 @@ const login = async (req: Request, res: Response) => {
     console.error(error);
     return res.status(401).json({ message: "Authentication failed" });
   }
-};
-
-export default login;
+}

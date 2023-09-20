@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema(
       type: Number,
     },
     group: { type: String },
+    meetings: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );

@@ -15,7 +15,7 @@ export default function LoginPage() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     const loggedIn = await axios.post(
-      "http://localhost:3000/api/users/login",
+      "http://localhost:3000/api/auth/login",
       data
     );
     if (!loggedIn.response?.data.msg) {

@@ -1,7 +1,11 @@
 import express from "express";
-import users from "./users.js";
+import auth from "./auth.js";
+import customers from "./customers.js";
+import appointment from "./appointment.js";
 const router = express.Router();
 
-router.use("/users", users);
+router.use("/auth", auth);
+router.use("/customers", customers);
+router.use("/appointment", appointment);
 
 export default router;

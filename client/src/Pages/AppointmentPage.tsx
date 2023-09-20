@@ -1,22 +1,31 @@
 import { useState } from "react";
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import MeetingsComponent from "../Components/MeetingsComponent";
-import DialogComponent from "../Components/DialogComponent";
 import NewDialogComponent from "../Components/NewDialogComponent";
+import axios from "axios";
+import useMeetings from "../hooks/useMeetings";
+
+export async function loader() {
+  const response = await axios.get(
+    "http://localhost:3000/api/customers/getCustomers"
+  );
+  const users = response.data.users;
+  return users;
+}
 
 export default function AppointmentPage() {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<boolean>(false);
   const [newOpen, setNewOpen] = useState<boolean>(false);
+  const users = useLoaderData() as Users[];
+  const meetings = useMeetings({ id: users[0]?._id });
 
   return (
     <Conatiner>
-      <DialogComponent setOpen={setOpen} open={open} />
-      <NewDialogComponent setOpen={setNewOpen} open={newOpen} />
+      <NewDialogComponent setOpen={setNewOpen} open={newOpen} users={users} />
       <ChoiceContainer>
         <PeopleOutlineIcon
           sx={{ fontSize: 30, color: "blue", cursor: "pointer" }}
@@ -31,13 +40,9 @@ export default function AppointmentPage() {
         <DateContainer>
           <p>23/08/23</p>
         </DateContainer>
-        <MeetingsComponent setOpen={setOpen} />
-        <MeetingsComponent setOpen={setOpen} />
-        <MeetingsComponent setOpen={setOpen} />
-        <MeetingsComponent setOpen={setOpen} />
-        <MeetingsComponent setOpen={setOpen} />
-        <MeetingsComponent setOpen={setOpen} />
-        <MeetingsComponent setOpen={setOpen} />
+        {meetings.map((meeting) => (
+          <MeetingsComponent meeting={meeting} />
+        ))}
         <IconWrapper>
           <AddIcon
             sx={{ fontSize: 50, color: "blue", cursor: "pointer " }}
@@ -51,6 +56,7 @@ export default function AppointmentPage() {
 
 const Conatiner = styled.div`
   display: flex;
+  height: 100vh;
 `;
 
 const DateContainer = styled.div``;

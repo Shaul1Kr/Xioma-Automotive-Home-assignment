@@ -4,15 +4,27 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import CustomerComponent from "../Components/CustomerComponent";
 import MeetingsComponent from "../Components/MeetingsComponent";
+import axios from "axios";
 import { useState } from "react";
-import DialogComponent from "../Components/DialogComponent";
+import useMeetings from "../hooks/useMeetings";
+import { useLoaderData } from "react-router-dom";
+
+export async function loader() {
+  const response = await axios.get(
+    "http://localhost:3000/api/customers/getCustomers"
+  );
+  const users = response.data.users;
+  return users;
+}
 
 export default function CustomersPage() {
   const navigate = useNavigate();
-  const [open, setOpen] = useState<boolean>(false);
+  const users = useLoaderData() as Users[];
+  const [index, setIndex] = useState<number>(0);
+  const meetings = useMeetings({ id: users[index]?._id });
+
   return (
     <Conatiner>
-      <DialogComponent setOpen={setOpen} open={open} />
       <ChoiceContainer>
         <PeopleOutlineIcon
           sx={{ fontSize: 30, color: "blue", cursor: "pointer" }}
@@ -24,18 +36,15 @@ export default function CustomersPage() {
         />
       </ChoiceContainer>
       <CustomersContainer>
-        <CustomerComponent />
+        <CustomerComponent users={users} index={index} setIndex={setIndex} />
         <MeetingTitleContainer>
           <MeetingTitle>Meetings</MeetingTitle>
           <MeetingsDvider></MeetingsDvider>
         </MeetingTitleContainer>
         <MeetingWrapper>
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
-          <MeetingsComponent setOpen={setOpen} />
+          {meetings.map((meeting) => (
+            <MeetingsComponent meeting={meeting} />
+          ))}
         </MeetingWrapper>
       </CustomersContainer>
     </Conatiner>

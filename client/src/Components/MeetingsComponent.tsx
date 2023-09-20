@@ -1,31 +1,37 @@
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import { styled } from "styled-components";
+import DialogComponent from "./DialogComponent";
 
 interface MeetingsComponentProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  meeting: Meetings;
 }
 
-export default function MeetingsComponent({ setOpen }: MeetingsComponentProps) {
+export default function MeetingsComponent({ meeting }: MeetingsComponentProps) {
+  const [open, setOpen] = useState<boolean>(false);
   return (
-    <MeetingsCustomerContainer onClick={() => setOpen((prev) => !prev)}>
-      <InfoWrapper>
-        <ProfilContainer>
-          <Avatar
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="Avatar"
-          />
-          <P>Haim Nagar</P>
-        </ProfilContainer>
-        <InfoContainer>
-          <Title>Details Of Treatments</Title>
-          <SubTitle>Open Waiting For Approval</SubTitle>
-        </InfoContainer>
-      </InfoWrapper>
-      <DateContainer>
-        <P>Task Date:</P>
-        <P>25/08/2022, 7:00</P>
-      </DateContainer>
-    </MeetingsCustomerContainer>
+    <>
+      <DialogComponent setOpen={setOpen} open={open} meeting={meeting} />
+      <MeetingsCustomerContainer onClick={() => setOpen((prev) => !prev)}>
+        <InfoWrapper>
+          <ProfilContainer>
+            <Avatar src={meeting.picturePath} alt="Avatar" />
+            <P>
+              {meeting.firstName} {meeting.lastName}
+            </P>
+          </ProfilContainer>
+          <InfoContainer>
+            <Title>{meeting.subject}</Title>
+            <SubTitle>Open Waiting For Approval</SubTitle>
+          </InfoContainer>
+        </InfoWrapper>
+        <DateContainer>
+          <P>Task Date:</P>
+          <P>
+            {meeting.Date},{meeting.start}
+          </P>
+        </DateContainer>
+      </MeetingsCustomerContainer>
+    </>
   );
 }
 

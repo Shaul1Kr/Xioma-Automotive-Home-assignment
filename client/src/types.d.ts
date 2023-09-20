@@ -1,7 +1,20 @@
 type Users = {
-  fistname: string;
-  lastname: string;
-  picture: string;
+  firstName: string;
+  lastName: string;
+  picturePath: string;
   id: string;
   group: string;
+  meetings: Array<object>;
+  _id: string;
+};
+
+type Meetings = {
+  firstName: string;
+  lastName: string;
+  picturePath: string;
+  Date: string;
+  start: string;
+  end: string;
+  subject: string;
+  discription: string;
 };

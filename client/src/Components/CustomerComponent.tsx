@@ -1,28 +1,56 @@
 import { styled } from "styled-components";
+import { NativeSelect } from "@mui/material";
+import { Dispatch, SetStateAction } from "react";
 
-export default function CustomerComponent() {
+interface CustomerComponentProps {
+  users: Users[];
+  index: number;
+  setIndex: Dispatch<SetStateAction<number>>;
+}
+
+export default function CustomerComponent({
+  users,
+  index,
+  setIndex,
+}: CustomerComponentProps) {
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setIndex(Number(event.target.value));
+  };
+
   return (
     <CustomerContainer>
       <Customer>Customer</Customer>
       <AvatarContainer>
-        <Avatar
-          src="https://www.w3schools.com/howto/img_avatar.png"
-          alt="Avatar"
-        />
-        <p>Dan Israel</p>
+        <Avatar src={users[index]?.picturePath} alt="Avatar" />
+        <p>
+          {users[index]?.firstName} {users[index]?.lastName}
+        </p>
       </AvatarContainer>
       <InfoContainer>
         <NameContainer>
           <Title>Name</Title>
-          <Info>Dan Israel</Info>
+          <NativeSelect
+            inputProps={{
+              name: "users",
+              id: "uncontrolled-native",
+            }}
+            onChange={handleChange}
+          >
+            {users.map((user, index) => (
+              <option value={index}>
+                {user?.firstName} {user?.lastName}
+              </option>
+            ))}
+          </NativeSelect>
+          <Info></Info>
         </NameContainer>
         <IDContainer>
           <Title>ID</Title>
-          <Info>302155697</Info>
+          <Info>{users[index]?.id}</Info>
         </IDContainer>
         <GroupContainer>
           <Title>Group</Title>
-          <Info>Group A</Info>
+          <Info>{users[index]?.group}</Info>
         </GroupContainer>
       </InfoContainer>
     </CustomerContainer>
