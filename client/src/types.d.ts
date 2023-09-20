@@ -6,6 +6,8 @@ type Users = {
   group: string;
   meetings: Array<object>;
   _id: string;
+  users: Array<Users>;
+  userId: string;
 };
 
 type Meetings = {

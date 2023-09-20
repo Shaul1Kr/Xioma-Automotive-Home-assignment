@@ -5,7 +5,7 @@ export async function getAllCustomers(req: Request, res: Response) {
   try {
     console.info(`Get all users`);
     const users = await User.find();
-    return res.status(200).json({ users });
+    return res.status(200).json({ users, userId: req.user.id });
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Bad request" });

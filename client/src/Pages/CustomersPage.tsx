@@ -14,14 +14,15 @@ export async function loader() {
     "http://localhost:3000/api/customers/getCustomers",
     { withCredentials: true }
   );
-  const users = response.data.users;
-  return users;
+  return response.data;
 }
 
 export default function CustomersPage() {
   const navigate = useNavigate();
-  const users = useLoaderData() as Users[];
-  const [index, setIndex] = useState<number>(0);
+  const { users, userId } = useLoaderData() as Users;
+  const [index, setIndex] = useState<number>(
+    users.findIndex((obj: Users) => obj._id === userId)
+  );
   const meetings = useMeetings({ id: users[index]?._id });
 
   return (
@@ -37,7 +38,11 @@ export default function CustomersPage() {
         />
       </ChoiceContainer>
       <CustomersContainer>
-        <CustomerComponent users={users} index={index} setIndex={setIndex} />
+        <CustomerComponent
+          users={users}
+          userIndex={index}
+          setIndex={setIndex}
+        />
         <MeetingTitleContainer>
           <MeetingTitle>Meetings</MeetingTitle>
           <MeetingsDvider></MeetingsDvider>

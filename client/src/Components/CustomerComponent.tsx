@@ -4,13 +4,13 @@ import { Dispatch, SetStateAction } from "react";
 
 interface CustomerComponentProps {
   users: Users[];
-  index: number;
+  userIndex: number;
   setIndex: Dispatch<SetStateAction<number>>;
 }
 
 export default function CustomerComponent({
   users,
-  index,
+  userIndex,
   setIndex,
 }: CustomerComponentProps) {
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -21,15 +21,16 @@ export default function CustomerComponent({
     <CustomerContainer>
       <Customer>Customer</Customer>
       <AvatarContainer>
-        <Avatar src={users[index]?.picturePath} alt="Avatar" />
+        <Avatar src={users[userIndex]?.picturePath} alt="Avatar" />
         <p>
-          {users[index]?.firstName} {users[index]?.lastName}
+          {users[userIndex]?.firstName} {users[userIndex]?.lastName}
         </p>
       </AvatarContainer>
       <InfoContainer>
         <NameContainer>
           <Title>Name</Title>
           <NativeSelect
+            value={userIndex}
             inputProps={{
               name: "users",
               id: "uncontrolled-native",
@@ -46,11 +47,11 @@ export default function CustomerComponent({
         </NameContainer>
         <IDContainer>
           <Title>ID</Title>
-          <Info>{users[index]?.id}</Info>
+          <Info>{users[userIndex]?.id}</Info>
         </IDContainer>
         <GroupContainer>
           <Title>Group</Title>
-          <Info>{users[index]?.group}</Info>
+          <Info>{users[userIndex]?.group}</Info>
         </GroupContainer>
       </InfoContainer>
     </CustomerContainer>

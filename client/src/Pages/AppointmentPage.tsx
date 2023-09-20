@@ -14,15 +14,14 @@ export async function loader() {
     "http://localhost:3000/api/customers/getCustomers",
     { withCredentials: true }
   );
-  const users = response.data.users;
-  return users;
+  return response.data;
 }
 
 export default function AppointmentPage() {
   const navigate = useNavigate();
   const [newOpen, setNewOpen] = useState<boolean>(false);
-  const users = useLoaderData() as Users[];
-  const meetings = useMeetings({ id: users[0]?._id });
+  const { users, userId } = useLoaderData() as Users;
+  const meetings = useMeetings({ id: userId });
 
   return (
     <Conatiner>
