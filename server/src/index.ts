@@ -12,7 +12,7 @@ const app = express();
 
 dotenv.config();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use("/api", api);

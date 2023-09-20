@@ -19,12 +19,12 @@ export default function NewDialogComponent({
     //Get all target and convert then in an object
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    data.id = users[0]._id;
     data.users = users[data.users]._id;
     setOpen(false);
     await axios.post(
       "http://localhost:3000/api/appointment/addNewAppointment",
-      data
+      data,
+      { withCredentials: true }
     );
   };
   return (

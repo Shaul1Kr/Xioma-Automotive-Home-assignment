@@ -11,7 +11,8 @@ import { useLoaderData } from "react-router-dom";
 
 export async function loader() {
   const response = await axios.get(
-    "http://localhost:3000/api/customers/getCustomers"
+    "http://localhost:3000/api/customers/getCustomers",
+    { withCredentials: true }
   );
   const users = response.data.users;
   return users;

@@ -11,7 +11,8 @@ import useMeetings from "../hooks/useMeetings";
 
 export async function loader() {
   const response = await axios.get(
-    "http://localhost:3000/api/customers/getCustomers"
+    "http://localhost:3000/api/customers/getCustomers",
+    { withCredentials: true }
   );
   const users = response.data.users;
   return users;
@@ -37,9 +38,7 @@ export default function AppointmentPage() {
         />
       </ChoiceContainer>
       <CustomersContainer>
-        <DateContainer>
-          <p>23/08/23</p>
-        </DateContainer>
+        <DateContainer></DateContainer>
         {meetings.map((meeting) => (
           <MeetingsComponent meeting={meeting} />
         ))}

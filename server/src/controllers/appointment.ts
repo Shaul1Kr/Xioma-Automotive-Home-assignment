@@ -4,9 +4,8 @@ import User from "../models/User.js";
 export async function addAppointment(req: Request, res: Response) {
   try {
     console.info(`Add new appointment`);
-    console.log(req.body);
-    const { date, start, end, users, subject, description, id } = req.body;
-    const user = await User.findById(id);
+    const { date, start, end, users, subject, description } = req.body;
+    const user = await User.findById(req.user.id);
     user.meetings.push({
       id: users,
       Date: date,

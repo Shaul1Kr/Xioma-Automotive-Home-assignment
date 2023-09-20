@@ -21,7 +21,7 @@ export default async function login(req: Request, res: Response) {
     return res
       .cookie("access_token", token, { httpOnly: true })
       .status(200)
-      .end();
+      .send("Login successfully");
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Authentication failed" });

@@ -9,7 +9,9 @@ export default function useMeetings({ id }: useMeetingsProps) {
   const [meetings, setMeetings] = useState<Meetings[]>([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/customers/getMeetings/${id}`)
+      .get(`http://localhost:3000/api/customers/getMeetings/${id}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         setMeetings(response.data);
       });
